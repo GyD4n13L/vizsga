@@ -1,0 +1,43 @@
+sudo apt update
+sudo apt install -y ssh
+git clone https://github.com/GyD4n13L/nginx.git
+cd nginx
+sudo bash docker-install.sh
+cd web
+mcedit ./index.html
+cd ..
+mcedit ./Dockerfile
+sudo docker image build -t ng .
+sudo docker container run -d -p 80:80 ng
+
+
+
+
+
+index.html
+<html>
+<title>Vizsga 2018</title>
+<body>Vizsga 2018</body>
+</html>
+
+
+
+
+Dockerfile:
+FROM nginx
+MAINTAINER Győrödi Dániel G
+
+RUN rm /usr/share/nginx/html/*
+COPY web /usr/share/nginx/html
+EXPOSE 80 443
+CMD ["nginx", "-g", "daemon off;"]
+
+host gép ipcím: ifconfig -->192.168.0.112
+ubuntu virtualis gép ipcím: 192.168.2.246    MAC-cím:08-00-27-02-B1-55
+docker belső ipcím:172.17.0.1
+
+
+Docker version: 18.03.1-ce build 9ee9f40
+
+
+
